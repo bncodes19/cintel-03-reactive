@@ -22,7 +22,11 @@ with ui.sidebar(position="right", bg="#f8f8f8", open="open"):
     ui.input_numeric("plotly_bin_count", "Plotly bin numeric",20,min=1,max=100)    
     ui.input_slider("seaborn_bin_count", "Seaborn bin count", 10, 100, 20,step=5, animate=True)
     ui.input_checkbox_group("selected_species_list","Select a species",
-                            choices=["Adelie", "Gentoo", "Chinstrap"],selected="Adelie", inline=True)
+                            choices=["Adelie", "Gentoo", "Chinstrap"],selected=["Adelie", "Gentoo", "Chinstrap"], inline=True)
+    ui.input_checkbox_group("selected_island_list","Select an island",
+                            choices=["Torgersen", "Biscoe", "Dream"],selected=["Torgersen", "Biscoe", "Dream"], inline=True)
+    ui.input_select(  
+    "selected_sex_list","Select Sex (M/F)",{"male": "Male", "female": "Female"},selected=["male","female"],multiple=True)
     ui.hr()
     ui.h5("GitHub Code Repository")
     ui.a("cintel-02-data", href="https://github.com/bncodes19/cintel-02-data", target="_blank")
@@ -86,4 +90,10 @@ with ui.layout_columns():
     
     @reactive.calc
     def filtered_data():
-        return penguins_df[penguins_df["species"].isin(input.selected_species_list())]
+        species_input = input.selected_species_list()
+        island_input = input.selected_island_list()
+        sex_input = input.selected_sex_list()
+        filtered_data = penguins_df[ (penguins_df['species'].isin(species_input))
+                                   & (penguins_df['island'].isin(island_input))
+                                   & (penguins_df['sex'].isin(sex_input))]
+        return filtered_data
