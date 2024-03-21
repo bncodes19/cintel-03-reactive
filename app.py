@@ -29,7 +29,7 @@ with ui.sidebar(position="right", bg="#f8f8f8", open="open"):
     "selected_sex_list","Select Sex (M/F)",{"male": "Male", "female": "Female"},selected=["male","female"],multiple=True)
     ui.hr()
     ui.h5("GitHub Code Repository")
-    ui.a("cintel-02-data", href="https://github.com/bncodes19/cintel-02-data", target="_blank")
+    ui.a("cintel-03-reactive", href="https://github.com/bncodes19/cintel-03-reactive/blob/main/app.py", target="_blank")
 
 #   a Plotly Histogram (showing all species)
 with ui.layout_columns():
